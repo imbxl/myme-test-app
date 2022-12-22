@@ -13,8 +13,10 @@ class Almacen(models.Model):
         verbose_name_plural = "Almacenes"
 
 class Stock(models.Model):
-    producto=models.ForeignKey(Producto, on_delete=models.CASCADE)
-    almacen=models.ForeignKey(Almacen, on_delete=models.CASCADE)
-    cantidad=models.IntegerField()
     class Meta:
+        unique_together = (('producto_id','almacen_id'),)
         verbose_name_plural = "Stock"
+
+    producto_id = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    almacen_id = models.ForeignKey(Almacen, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()

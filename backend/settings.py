@@ -46,7 +46,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/build')
+            os.path.join(BASE_DIR, 'frontend/build'), # Front React
+            os.path.join(BASE_DIR, 'api/templates') # API Templates
         ],
         'APP_DIRS': True,
         'OPTIONS': {
