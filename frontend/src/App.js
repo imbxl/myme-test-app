@@ -29,6 +29,7 @@ import Home from './home';
 import Almacenes from './Almacenes';
 import Productos from './Productos';
 import Stock from './Stock';
+import Pedidos from './Pedidos';
 import Login from './login';
 import Error404 from './404';
 
@@ -80,6 +81,7 @@ export default function App() {
               locacion.pathname === '/productos/' ? 'Administrar productos' : 
               locacion.pathname === '/almacenes/' ? 'Administrar almacenes' : 
               locacion.pathname === '/stock/' ? 'Administrar stock' : 
+              locacion.pathname === '/pedidos/' ? 'Administrar pedidos' : 
               'Stock App'
             }
           </h3>
@@ -99,6 +101,7 @@ export default function App() {
         <Route path="/productos/" element={<Productos setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="/almacenes/" element={<Almacenes setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="/stock/" element={<Stock setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
+        <Route path="/pedidos/" element={<Pedidos setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="*" element={<Error404 setLoading={setLoading} />} />
       </Routes>
     </Container>

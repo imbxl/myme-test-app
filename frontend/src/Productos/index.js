@@ -169,7 +169,7 @@ export default function Productos({loading, setLoading}) {
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell align="center" component="th" scope="row">{nombre}</TableCell>
                         <TableCell align="center">{sku}</TableCell>
-                        <TableCell align="center">{precio}</TableCell>
+                        <TableCell align="center">${precio}</TableCell>
                         <TableCell align="center">
                           <IconButton onClick={()=>{setEditando(id)}}><EditIcon /></IconButton>
                           <IconButton onClick={()=>{setOpenEliminando(id)}}><DeleteIcon /></IconButton>

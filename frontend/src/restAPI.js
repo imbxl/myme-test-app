@@ -140,6 +140,7 @@ export function deleteAlmacen(id, result){
   RestRequest('DELETE', {}, 'almacen/'+id+'/', result);
 }
 
+
 /*
  *
  * Stock
@@ -153,4 +154,17 @@ export function addProductoStock(almacen, producto, cantidad, result){
 }
 export function updateProductoStock(id, almacen, producto, cantidad, result){
   RestRequest('PUT', {almacen, producto, cantidad}, 'stock/'+id+'/', result);
+}
+
+
+/*
+ *
+ * Pedidos
+ *  
+ */
+export function getPedidos(result){
+  RestRequest('GET', {}, 'pedido/', result);
+}
+export function addPedido(data, result){
+  RestRequest('POST', data, 'pedido/', result);
 }
