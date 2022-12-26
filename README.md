@@ -2,7 +2,7 @@
 App para la prueba técnica de Myme / Snippet
 
 ## ¿Por qué API REST?
-Ya que la aplicación es React e independiente del backend podria utilizarse para IOS o Android y funcionar igualmente solo cambiando la variable `REST_ENDPOINT` en App.js, por la URL donde se ejecutará el Python.
+Ya que la aplicación es React e independiente del backend podria utilizarse para IOS o Android y funcionar igualmente solo cambiando la variable `REST_ENDPOINT` en restAPI.js, por la URL donde se ejecutará el Python.
 
 ## Como instalar
 * 1) Descargar e instalar Python 3.x.x https://www.python.org/downloads/, luego dirigirse a la ruta del proyecto desde un terminal.
@@ -22,6 +22,7 @@ pip install django-filter
 * 4) Compilar React:
 ```
 cd frontend
+npm install
 npm run build
 cd ..
 ```
