@@ -135,7 +135,7 @@ export default function Productos({loading, setLoading}) {
       <Grid item xl={12} lg={12} md={12} xs={12}>
         <Card>
           <CardContent>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableCell align="center">Nombre</TableCell>
