@@ -6,21 +6,10 @@ import { TourProvider } from '@reactour/tour'
 //Extended Components
 import App from './App';
 
-const steps = [
-  {
-    selector: '.agregar-tour',
-    content: 'Puedes agregar registros aquí',
-  },
-  {
-    selector: '.search-tour',
-    content: 'Puedes filtrar los registros aquí',
-  },
-]
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <TourProvider steps={steps}>
+    <TourProvider>
       <App />
     </TourProvider>
   </BrowserRouter>

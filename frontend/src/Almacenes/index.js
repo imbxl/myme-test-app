@@ -49,8 +49,19 @@ const styleModal = {
   boxShadow: 24,
 };
 
+const toursteps = [
+  {
+    selector: '.agregar-tour',
+    content: 'Puedes agregar productos aquí',
+  },
+  {
+    selector: '.search-tour',
+    content: 'Puedes filtrar los productos aquí',
+  },
+]
+
 export default function Almacenes({loading, setLoading}) {
-  const { setIsOpen } = useTour();
+  const { setSteps, setIsOpen, setCurrentStep } = useTour();
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
   const [itemsMemoria, setAlmacensMemoria] = useState(false);
@@ -104,12 +115,14 @@ export default function Almacenes({loading, setLoading}) {
         if(data===false){
           console.error('Error al cargar los almacenes');
         }else{
+          setAlmacens(data);
+          setAlmacensMemoria(data);
           if(window.localStorage.getItem('almacen-tour') === null){
+            setSteps(toursteps);
+            setCurrentStep(0);
             setIsOpen(true);
             window.localStorage.setItem('almacen-tour', 1)
           }
-          setAlmacens(data);
-          setAlmacensMemoria(data);
         }
       });
     }else{
@@ -119,7 +132,7 @@ export default function Almacenes({loading, setLoading}) {
       });
       setAlmacens(filteredData);
     }
-  }, [filter, setAlmacens, setLoading, itemsMemoria, setIsOpen]);
+  }, [filter, setAlmacens, setLoading, itemsMemoria, setIsOpen, setCurrentStep, setSteps]);
 
   if(items !== false){
     return (<>

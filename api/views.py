@@ -19,6 +19,12 @@ class AlmacenApiViewSet(ModelViewSet):
 class StockApiViewSet(ModelViewSet):
     serializer_class = StockSerializer
     queryset = Stock.objects.all()
+    def get_queryset(self):
+        queryset = Stock.objects.all()
+        almacen = self.request.query_params.get('almacen')
+        if almacen is not None:
+            queryset = queryset.filter(almacen=almacen)
+        return queryset
 
 class PedidoApiViewSet(ModelViewSet):
     serializer_class = PedidoSerializer

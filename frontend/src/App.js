@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {
   useNavigate, 
   Routes,
+  useLocation,
   Link,
   Route
 } from "react-router-dom";
@@ -27,6 +28,7 @@ import logo from './logo.svg';
 import Home from './home';
 import Almacenes from './Almacenes';
 import Productos from './Productos';
+import Stock from './Stock';
 import Login from './login';
 import Error404 from './404';
 
@@ -37,6 +39,7 @@ const initialStateUser = {username:'', id:0};
 
 export default function App() {
   const navigate = useNavigate();
+  const locacion = useLocation();
   const [iniciado, setIniciado] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(initialStateUser);
@@ -68,10 +71,22 @@ export default function App() {
     <Container maxWidth="lg">
       <CssBaseline />
       <Grid spacing={2} container justifyContent={"space-between"} alignItems="flex-end">
-        <Grid item><Link to='/'><img src={logo} data-testid="App-logo" alt="logo" /></Link></Grid>
+        <Grid item>
+          <Link to='/'><img src={logo} data-testid="App-logo" alt="logo" /></Link>
+        </Grid>
+        <Grid item>
+          <h3 style={{margin: 2}}>
+            {
+              locacion.pathname === '/productos/' ? 'Administrar productos' : 
+              locacion.pathname === '/almacenes/' ? 'Administrar almacenes' : 
+              locacion.pathname === '/stock/' ? 'Administrar stock' : 
+              'Stock App'
+            }
+          </h3>
+        </Grid>
         <Grid item>
           <Grid spacing={1} container justifyContent={"space-between"} alignItems="center">
-            <Grid item><CircularProgress size={28} disableShrink style={{display: loading ? 'block' : 'none'}} /></Grid>
+            <Grid item style={{minWidth: 36}}><CircularProgress size={28} disableShrink style={{display: loading ? 'block' : 'none'}} /></Grid>
             <Grid item style={{display: iniciado ? 'block' : 'none'}}><span>Bienvenido {user.username}</span></Grid>
             <Grid item style={{display: iniciado ? 'block' : 'none'}}><IconButton onClick={handleSignOut} size="small"><LogoutIcon /></IconButton></Grid>
           </Grid>
@@ -83,6 +98,7 @@ export default function App() {
         <Route path="/login/" element={<Login setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="/productos/" element={<Productos setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="/almacenes/" element={<Almacenes setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
+        <Route path="/stock/" element={<Stock setLoading={setLoading} iniciado={iniciado} loading={loading}  />} />
         <Route path="*" element={<Error404 setLoading={setLoading} />} />
       </Routes>
     </Container>

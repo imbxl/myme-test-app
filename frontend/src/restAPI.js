@@ -139,3 +139,18 @@ export function setAlmacen(id, data, result){
 export function deleteAlmacen(id, result){
   RestRequest('DELETE', {}, 'almacen/'+id+'/', result);
 }
+
+/*
+ *
+ * Stock
+ *  
+ */
+export function getStockAlmacen(id, result){
+  RestRequest('GET', {}, 'stock/?almacen='+id, result);
+}
+export function addProductoStock(almacen, producto, cantidad, result){
+  RestRequest('POST', {almacen, producto, cantidad}, 'stock/', result);
+}
+export function updateProductoStock(id, almacen, producto, cantidad, result){
+  RestRequest('PUT', {almacen, producto, cantidad}, 'stock/'+id+'/', result);
+}

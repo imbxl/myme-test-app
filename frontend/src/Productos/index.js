@@ -49,8 +49,19 @@ const styleModal = {
   boxShadow: 24,
 };
 
+const toursteps = [
+  {
+    selector: '.agregar-tour',
+    content: 'Puedes agregar productos aquí',
+  },
+  {
+    selector: '.search-tour',
+    content: 'Puedes filtrar los productos aquí',
+  },
+]
+
 export default function Productos({loading, setLoading}) {
-  const { setIsOpen } = useTour();
+  const { setSteps, setIsOpen, setCurrentStep } = useTour();
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
   const [productosMemoria, setProductosMemoria] = useState(false);
@@ -104,12 +115,14 @@ export default function Productos({loading, setLoading}) {
         if(data===false){
           console.error('Error al cargar los productos');
         }else{
+          setProductos(data);
+          setProductosMemoria(data);
           if(window.localStorage.getItem('producto-tour') === null){
+            setSteps(toursteps);
+            setCurrentStep(0);
             setIsOpen(true);
             window.localStorage.setItem('producto-tour', 1)
           }
-          setProductos(data);
-          setProductosMemoria(data);
         }
       });
     }else{
@@ -119,7 +132,7 @@ export default function Productos({loading, setLoading}) {
       });
       setProductos(filteredData);
     }
-  }, [filter, setProductos, setLoading, productosMemoria, setIsOpen]);
+  }, [filter, setProductos, setLoading, productosMemoria, setIsOpen, setCurrentStep, setSteps]);
 
   if(productos !== false){
     return (<>
