@@ -30,12 +30,9 @@ const CrearPedido = ({almacen, productos, stock, almacenNombre, setLoading, setC
     const [total, setTotal] = useState(0);
 
     const handleChange = (e) => {
-        for(let item of productos){
-            if(parseInt(item.id) === parseInt(e.target.value)){
-                setCurrentStock(parseInt(stock[e.target.value]));
-                document.querySelector('[name="cantidad"]').value = 1;
-            }
-        }
+        let ItemStock = parseInt(typeof stock[e.target.value] !== 'undefined' ? stock[e.target.value] : 0)
+        setCurrentStock(ItemStock);
+        document.querySelector('[name="cantidad"]').value = ItemStock > 0 ? 1 : 0;
     };
 
     const getProdDatos = (producto_id) => { 
@@ -212,7 +209,9 @@ const CrearPedido = ({almacen, productos, stock, almacenNombre, setLoading, setC
                             onChange={handleChange}
                             >
                             {productos !== false && productos.map(item => {
-                                return (<MenuItem key={item.id} value={item.id}>{item.nombre} ({item.sku})</MenuItem>);
+                                return (<MenuItem key={item.id} value={item.id}>{item.nombre} ({item.sku}) | {
+                                    typeof stock[item.id] !== 'undefined' ? stock[item.id] : 0
+                                } en stock</MenuItem>);
                             })}
                         </Select>
                     </FormControl>
@@ -225,9 +224,9 @@ const CrearPedido = ({almacen, productos, stock, almacenNombre, setLoading, setC
                         autoComplete="off"
                         label="Cantidad"
                         variant="standard"
-                        InputProps={{ inputProps: { min: 1, max: currentStock } }}
+                        InputProps={{ inputProps: { min: currentStock > 0 ? 1 : 0, max: currentStock } }}
                         name="cantidad"
-                        defaultValue={1}
+                        defaultValue={currentStock > 0 ? 1 : 0}
                         type="number"
                     />
                 </Grid>

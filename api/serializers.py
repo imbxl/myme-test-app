@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from stock.models import Producto, Almacen, Stock, Pedido, PedidoProducto
 from django.contrib.auth.models import User
+from django.db.models import F
 from pprint import pprint
 
 class UserSerializer(ModelSerializer):
@@ -57,6 +58,7 @@ class PedidoSaveSerializer(ModelSerializer):
         pedido_productos_data = validated_data.pop('pedido_productos')
         pedido = Pedido.objects.create(**validated_data)
         for producto_data in pedido_productos_data:
-            pprint(producto_data)
             PedidoProducto.objects.create(pedido=pedido, **producto_data)
+            Stock.objects.filter(producto=producto_data['producto'],
+                                 almacen=validated_data['almacen']).update(cantidad=F('cantidad')-producto_data['cantidad'])
         return pedido
